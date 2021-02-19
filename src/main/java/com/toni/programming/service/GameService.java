@@ -13,10 +13,16 @@ public class GameService {
 
     private Integer maxPoints = 100;
     UserAction userAction = new UserAction();
-    public static final List<UserAction> userActions = new ArrayList<>();
-    private static final Pokemon currentLifeBeing = new Pokemon();
+    public static List<UserAction> userActions = new ArrayList<>();
+    private static Pokemon currentLifeBeing = new Pokemon();
 
+    public Pokemon getCurrentLifeBeing() {
+        return currentLifeBeing;
+    }
 
+    public void setCurrentLifeBeing(Pokemon currentLifeBeing) {
+        GameService.currentLifeBeing = currentLifeBeing;
+    }
 
     public List<Actions> getPokeActions() {
         return currentLifeBeing.getActions();

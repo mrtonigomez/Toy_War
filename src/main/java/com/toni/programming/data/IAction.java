@@ -9,7 +9,7 @@ public interface IAction {
     public void doEscape();
     public void doFly();
     public void doDig();
-    public void doTalk();
+    public void doHeal();
     public void doSwim();
     public void doSleep();
     public void doEat();

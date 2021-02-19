@@ -19,49 +19,49 @@ public class PokemonRestController {
 
     GameService gameService = new GameService();
 
-@GetMapping("/new")
-public Pokemon getPokemon(@RequestParam(value = "name", defaultValue = "Charizard") String name,
-                          @RequestParam(value = "type", defaultValue = "Fire") String type,
-                          @RequestParam(value = "color", defaultValue = "red") String color,
-                          @RequestParam(value = "level", defaultValue = "2") Integer level){
+    @GetMapping("/new")
+    public Pokemon getPokemon(@RequestParam(value = "name", defaultValue = "Charizard") String name,
+                              @RequestParam(value = "type", defaultValue = "Fire") String type,
+                              @RequestParam(value = "color", defaultValue = "red") String color,
+                              @RequestParam(value = "level", defaultValue = "2") Integer level) {
 
-    Pokemon charizard = new Pokemon(name, type, color, level);
+        gameService.setCurrentLifeBeing(new Pokemon(name, type, color, level));
 
-    return charizard;
-}
+        return gameService.getCurrentLifeBeing();
+    }
 
-@GetMapping("/getActions")
-public List<Actions> getActions(){
+    @GetMapping("/getActions")
+    public List<Actions> getActions() {
 
-    List<Actions> pokemonActions = new ArrayList<>();
+        List<Actions> pokemonActions = new ArrayList<>();
 
-    pokemonActions.add(Actions.ATTACK);
-    pokemonActions.add(Actions.DEFEND);
-    pokemonActions.add(Actions.FLY);
-    gameService.addPokeActions(pokemonActions);
+        pokemonActions.add(Actions.ATTACK);
+        pokemonActions.add(Actions.DEFEND);
+        pokemonActions.add(Actions.FLY);
+        gameService.addPokeActions(pokemonActions);
 
-    return gameService.getPokeActions();
 
-}
+        return gameService.getPokeActions();
+    }
 
-@GetMapping("/doAttack")
+    @GetMapping("/doAttack")
     public Pokemon doAttack(@RequestParam(value = "name", defaultValue = "Blastoise") String name,
                             @RequestParam(value = "type", defaultValue = "Water") String type,
                             @RequestParam(value = "color", defaultValue = "blue") String color,
-                            @RequestParam(value = "level", defaultValue = "36") Integer level){
+                            @RequestParam(value = "level", defaultValue = "36") Integer level) {
 
-    Pokemon blastoise = new Pokemon(name, type, color, level);
-    blastoise.doAttack();
+        gameService.setCurrentLifeBeing(new Pokemon(name, type, color, level));
+        gameService.getCurrentLifeBeing().doAttack();
 
-    List<Actions> pokemonActions = new ArrayList<>();
+        List<Actions> pokemonActions = new ArrayList<>();
 
-    pokemonActions.add(Actions.ATTACK);
-    pokemonActions.add(Actions.DEFEND);
-    pokemonActions.add(Actions.FLY);
-    gameService.addPokeActions(pokemonActions);
+        pokemonActions.add(Actions.ATTACK);
+        pokemonActions.add(Actions.DEFEND);
+        pokemonActions.add(Actions.SWIM);
+        gameService.getCurrentLifeBeing().setActions(pokemonActions);
 
-    return blastoise;
+        return gameService.getCurrentLifeBeing();
 
-}
+    }
 
 }

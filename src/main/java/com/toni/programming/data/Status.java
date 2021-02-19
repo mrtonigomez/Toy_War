@@ -7,22 +7,6 @@ public class Status extends LifeBeing {
     private Integer statusPoints;
     private String currentStatus;
 
-    public Integer getStatusPoints() {
-        return statusPoints;
-    }
-
-    public void setStatusPoints(Integer statusPoints) {
-        this.statusPoints = statusPoints;
-    }
-
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
-
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
-    }
-
     @Override
     public void doAttack() {
 
@@ -49,7 +33,7 @@ public class Status extends LifeBeing {
     }
 
     @Override
-    public void doTalk() {
+    public void doHeal() {
 
     }
 
@@ -83,4 +67,19 @@ public class Status extends LifeBeing {
         return null;
     }
 
+    public Integer getStatusPoints() {
+        return statusPoints;
+    }
+
+    public void setStatusPoints(Integer statusPoints) {
+        this.statusPoints = statusPoints;
+    }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
+    }
 }
