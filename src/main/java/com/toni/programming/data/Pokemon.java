@@ -2,14 +2,25 @@ package com.toni.programming.data;
 
 import java.util.List;
 
-public class Pokemon extends LifeBeing implements IAction, IRender{
+public class Pokemon extends LifeBeing implements IAction, IRender {
 
     private Status status;
-    private List<IAction> actions;
+    private String typeOfToy = "Pokemon";
+    private List<Actions> actions;
     private String name;
     private String Type;
     private String color;
     private Integer level;
+
+    @Override
+    public String getTypeOfToy() {
+        return typeOfToy;
+    }
+
+    @Override
+    public void setTypeOfToy(String typeOfToy) {
+        this.typeOfToy = typeOfToy;
+    }
 
     @Override
     public Status getStatus() {
@@ -21,11 +32,11 @@ public class Pokemon extends LifeBeing implements IAction, IRender{
         this.status = status;
     }
 
-    public List<IAction> getActions() {
+    public List<Actions> getActions() {
         return actions;
     }
 
-    public void setActions(List<IAction> actions) {
+    public void setActions(List<Actions> actions) {
         this.actions = actions;
     }
 
@@ -61,8 +72,11 @@ public class Pokemon extends LifeBeing implements IAction, IRender{
         this.level = level;
     }
 
+
     @Override
     public void doAttack() {
+
+
 
     }
 
@@ -78,7 +92,6 @@ public class Pokemon extends LifeBeing implements IAction, IRender{
 
     @Override
     public void doFly() {
-
     }
 
     @Override
@@ -104,11 +117,17 @@ public class Pokemon extends LifeBeing implements IAction, IRender{
     @Override
     public void doEat() {
 
+
     }
 
     @Override
     public void doWeakened() {
 
+    }
+
+    @Override
+    public List<Actions> getCurrentActions() {
+        return null;
     }
 
     @Override
@@ -119,18 +138,18 @@ public class Pokemon extends LifeBeing implements IAction, IRender{
 
     public Pokemon(String name, String type, String color, Integer level) {
         this.name = name;
-        Type = type;
+        this.Type = type;
         this.color = color;
         this.level = level;
     }
-    public Pokemon(){
+
+    public Pokemon() {
 
     }
+
     public Pokemon(Pokemon pokemon) {
         super();
     }
 
-    public List<Actions> getCurrentActions(){
-        return null;
-    }
+
 }

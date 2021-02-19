@@ -1,6 +1,6 @@
 package com.toni.programming.service;
 
-import com.toni.programming.data.LifeBeing;
+import com.toni.programming.data.Actions;
 import com.toni.programming.data.Pokemon;
 import com.toni.programming.data.UserAction;
 import org.springframework.stereotype.Service;
@@ -12,17 +12,18 @@ import java.util.List;
 public class GameService {
 
     private Integer maxPoints;
-    public static final LifeBeing currentLifeBeing = new Pokemon();
+    UserAction userAction = new UserAction();
     public static final List<UserAction> userActions = new ArrayList<>();
-    public static List<Pokemon> pokemonList = new ArrayList<>();
+    private static final Pokemon currentLifeBeing = new Pokemon();
 
-    public List<Pokemon> getPokemonList(){return pokemonList;}
 
-    public Pokemon newPokemon(Pokemon pokemon) {
 
-        Pokemon pokemon1 = new Pokemon(pokemon);
-        pokemon1.setType("Electric");
-        pokemonList.add(pokemon1);
-        return pokemon1;
+    public List<Actions> getPokeActions() {
+        return currentLifeBeing.getActions();
     }
+
+    public void addPokeActions(List<Actions> actionsList) {
+        currentLifeBeing.setActions(actionsList);
+    }
+
 }
