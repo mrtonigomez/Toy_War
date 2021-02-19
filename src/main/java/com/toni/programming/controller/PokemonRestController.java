@@ -44,6 +44,24 @@ public List<Actions> getActions(){
 
 }
 
+@GetMapping("/doAttack")
+    public Pokemon doAttack(@RequestParam(value = "name", defaultValue = "Blastoise") String name,
+                            @RequestParam(value = "type", defaultValue = "Water") String type,
+                            @RequestParam(value = "color", defaultValue = "blue") String color,
+                            @RequestParam(value = "level", defaultValue = "36") Integer level){
 
+    Pokemon blastoise = new Pokemon(name, type, color, level);
+    blastoise.doAttack();
+
+    List<Actions> pokemonActions = new ArrayList<>();
+
+    pokemonActions.add(Actions.ATTACK);
+    pokemonActions.add(Actions.DEFEND);
+    pokemonActions.add(Actions.FLY);
+    gameService.addPokeActions(pokemonActions);
+
+    return blastoise;
+
+}
 
 }

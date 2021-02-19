@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private Integer maxPoints;
+    private Integer maxPoints = 100;
     UserAction userAction = new UserAction();
     public static final List<UserAction> userActions = new ArrayList<>();
     private static final Pokemon currentLifeBeing = new Pokemon();
@@ -26,4 +26,9 @@ public class GameService {
         currentLifeBeing.setActions(actionsList);
     }
 
+    public void doAction (Actions pokeaction){
+
+    }
+
 }
+

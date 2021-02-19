@@ -1,5 +1,7 @@
 package com.toni.programming.data;
 
+import org.apache.catalina.User;
+
 import java.util.List;
 
 public class Pokemon extends LifeBeing implements IAction, IRender {
@@ -73,25 +75,38 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
     }
 
 
+
     @Override
     public void doAttack() {
-
-
-
+        Status attackStatus = new Status();
+        UserAction attackUserAction = new UserAction();
+        attackStatus.setStatusPoints(attackUserAction.getStartingPoints()+10);
+        attackStatus.setCurrentStatus("Attack mode!");
+        setStatus(attackStatus);
     }
 
     @Override
     public void doDefend() {
-
+        Status defenseStatus = new Status();
+        UserAction defenseUserAction = new UserAction();
+        defenseStatus.setStatusPoints(defenseUserAction.getStartingPoints());
+        defenseStatus.setCurrentStatus("Defense mode!");
+        setStatus(defenseStatus);
     }
 
     @Override
     public void doEscape() {
-
+        Status escapeStatus = new Status();
+        UserAction escapeUserAction = new UserAction();
+        escapeStatus.setStatusPoints(escapeUserAction.getStartingPoints()-5);
+        escapeStatus.setCurrentStatus("You have no honor...");
+        setStatus(escapeStatus);
     }
 
     @Override
     public void doFly() {
+
+
     }
 
     @Override
@@ -116,7 +131,6 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
 
     @Override
     public void doEat() {
-
 
     }
 
