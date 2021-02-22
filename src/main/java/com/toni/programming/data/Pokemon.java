@@ -2,9 +2,11 @@ package com.toni.programming.data;
 
 
 import com.toni.programming.service.GameService;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
+
 import java.util.List;
+
 
 public class Pokemon extends LifeBeing implements IAction, IRender {
 
@@ -100,7 +102,7 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
         UserAction escapeUserAction = new UserAction();
         escapeStatus.setStatusPoints(escapeUserAction.getStartingPoints()-5);
         escapeStatus.setCurrentStatus("You have no honor...");
-        setStatus(escapeStatus);
+        gameService.getCurrentLifeBeing().setStatus(escapeStatus);
     }
 
     @Override
@@ -109,38 +111,62 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
         UserAction flyUserAction = new UserAction();
         flyStatus.setStatusPoints(flyUserAction.getStartingPoints()+3);
         flyStatus.setCurrentStatus("You're flying high");
-        setStatus(flyStatus);
+        gameService.getCurrentLifeBeing().setStatus(flyStatus);
 
     }
 
     @Override
     public void doDig() {
-
+        Status digStatus = new Status();
+        UserAction digUserAction = new UserAction();
+        digStatus.setStatusPoints(digUserAction.getStartingPoints());
+        digStatus.setCurrentStatus("You used dig");
+        gameService.getCurrentLifeBeing().setStatus(digStatus);
     }
 
     @Override
     public void doHeal() {
-
+        Status healStatus = new Status();
+        UserAction healUserAction = new UserAction();
+        healStatus.setStatusPoints(healUserAction.getStartingPoints()+20);
+        healStatus.setCurrentStatus("You are healing");
+        gameService.getCurrentLifeBeing().setStatus(healStatus);
     }
 
     @Override
     public void doSwim() {
-
+        Status swimStatus = new Status();
+        UserAction swimUserAction = new UserAction();
+        swimStatus.setStatusPoints(swimUserAction.getStartingPoints()+4);
+        swimStatus.setCurrentStatus("Your are swimming");
+        gameService.getCurrentLifeBeing().setStatus(swimStatus);
     }
 
     @Override
     public void doSleep() {
-
+        Status sleepStatus = new Status();
+        UserAction sleepUserAction = new UserAction();
+        sleepStatus.setStatusPoints(sleepUserAction.getStartingPoints());
+        sleepStatus.setCurrentStatus("Your body is resting");
+        gameService.getCurrentLifeBeing().setStatus(sleepStatus);
     }
 
     @Override
     public void doEat() {
-
+        Status eatStatus = new Status();
+        UserAction eatUserAction = new UserAction();
+        eatStatus.setStatusPoints(eatUserAction.getStartingPoints());
+        eatStatus.setCurrentStatus("Your are eating to much!");
+        gameService.getCurrentLifeBeing().setStatus(eatStatus);
     }
 
     @Override
     public void doWeakened() {
-
+        Status weakenedStatus = new Status();
+        UserAction weakenedUserAction = new UserAction();
+        weakenedStatus.setStatusPoints(weakenedUserAction.getStartingPoints());
+        weakenedStatus.setCurrentStatus("Your are done...");
+        gameService.getCurrentLifeBeing().setStatus(weakenedStatus);
     }
 
     @Override
@@ -155,9 +181,31 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
 
     @Override
     public String doRender(RenderType renderType) {
-        return null;
+        String rtn = StringUtils.EMPTY;
+
+        switch (renderType) {
+            case HTML:
+                rtn = String.format("<div><h2>Tu pokemon</h2></div>");
+                break;
+            case CONSOLE:
+                System.out.println(toStringPokemon(gameService.getCurrentLifeBeing()));
+                break;
+            case JSON:
+               break;
+        }
+        return rtn;
     }
 
+
+    public String toStringPokemon(Pokemon pokemon){
+
+        String content= "Nombre: " + gameService.getCurrentLifeBeing().getName() + "\n" +
+                        "Nivel: " + gameService.getCurrentLifeBeing().getLevel() + "\n" +
+                        "Color: " + gameService.getCurrentLifeBeing().getColor() + "\n" +
+                        "Tipo de jugueye: " + gameService.getCurrentLifeBeing().getTypeOfToy() + "\n";
+
+        return content;
+    }
 
     public Pokemon(String name, String type, String color, Integer level) {
         this.name = name;

@@ -1,8 +1,7 @@
 package com.toni.programming.service;
 
-import com.toni.programming.data.Actions;
-import com.toni.programming.data.Pokemon;
-import com.toni.programming.data.UserAction;
+import com.toni.programming.data.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

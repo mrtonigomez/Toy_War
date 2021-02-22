@@ -2,6 +2,7 @@ package com.toni.programming.controller;
 
 import com.toni.programming.data.Actions;
 import com.toni.programming.data.Pokemon;
+import com.toni.programming.data.RenderType;
 import com.toni.programming.data.Status;
 import com.toni.programming.service.GameService;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class PokemonRestController {
         return gameService.getPokeActions();
     }
 
-    @GetMapping("/doAttack")
+    @GetMapping("/doActions")
     public Pokemon doAttack(@RequestParam(value = "name", defaultValue = "Blastoise") String name,
                             @RequestParam(value = "type", defaultValue = "Water") String type,
                             @RequestParam(value = "color", defaultValue = "blue") String color,
@@ -59,6 +60,14 @@ public class PokemonRestController {
         gameService.getCurrentLifeBeing().setCurrentActions(Actions.ATTACK);
 
         return gameService.getCurrentLifeBeing();
+
+    }
+
+    @GetMapping("/render")
+    public String render(){
+
+        gameService.setCurrentLifeBeing(new Pokemon("Picachu", "Electric", "Yellow", 200));
+        return gameService.getCurrentLifeBeing().doRender(RenderType.HTML);
 
     }
 
