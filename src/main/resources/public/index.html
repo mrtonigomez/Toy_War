@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TOY WARDS!</title>
+    <style>
+        body{font-family: Calibri;color: darkblue;}
+    </style>
+</head>
+<body>
+<h1>Your mega toy IS HERE!</h1>
+
+<div id="current-pokemon">
+    <h2 id="typeoftoy"></h2>
+    <h3>Name</h3>
+    <p id="name"></p>
+    <h3>Type</h3>
+    <p id="type"></p>
+    <h3>Level</h3>
+    <p id="level"></p>
+    <h3>Color</h3>
+    <p id="color"></p>
+    <h3>Status</h3>
+    <lh>Points out of 100 and Current Status:</lh>
+    <ul>
+        <li id="status-p"></li>
+        <li id="status-c"></li>
+    </ul>
+    <h3>Actions from recent to older!</h3>
+    <ol id="actions">
+    </ol>
+
+</div>
+
+<script>
+    fetch("http://localhost:8080/rest/api/v1/doAttack")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            document.getElementById('typeoftoy').innerHTML = data.typeOfToy;
+            document.getElementById('name').innerHTML = data.name;
+            document.getElementById('type').innerHTML = data.type;
+            document.getElementById('level').innerHTML = data.level;
+            document.getElementById('color').innerHTML = data.color;
+            document.getElementById('status-p').innerHTML = data.status.statusPoints;
+            document.getElementById('status-c').innerHTML = data.status.currentStatus;
+
+            let actionsDone = "";
+            console.log(data.actions.length);
+            for (let i = data.actions.length-1; i >= 0; i--) {
+                actionsDone += `<li>${data.actions[i]}</li>`
+            }
+            document.getElementById('actions').innerHTML = actionsDone;
+
+        });
+</script>
+</body>
+</html>
