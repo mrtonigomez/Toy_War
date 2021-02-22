@@ -1,8 +1,10 @@
 package com.toni.programming.data;
 
+
 public abstract class LifeBeing implements IAction, IRender {
 
-    private Status status;
+    protected Status status;
+    protected String typeOfToy;
 
     public Status getStatus() {
         return status;
@@ -12,4 +14,11 @@ public abstract class LifeBeing implements IAction, IRender {
         this.status = status;
     }
 
+    public String getTypeOfToy() {
+        return typeOfToy;
+    }
+
+    public void setTypeOfToy(String typeOfToy) {
+        this.typeOfToy = typeOfToy;
+    }
 }

@@ -1,9 +1,12 @@
 package com.toni.programming.data;
 
+import java.util.List;
+
 public class UserAction {
 
     private String toy;
-    private Integer startingPoints;
+    private List<Actions> historicalActions;
+    private final Integer startingPoints = 50;
     private Integer achievedPoints;
 
     public String getToy() {
@@ -18,15 +21,19 @@ public class UserAction {
         return startingPoints;
     }
 
-    public void setStartingPoints(Integer startingPoints) {
-        this.startingPoints = startingPoints;
-    }
-
     public Integer getAchievedPoints() {
         return achievedPoints;
     }
 
     public void setAchievedPoints(Integer achievedPoints) {
         this.achievedPoints = achievedPoints;
+    }
+
+    public List<Actions> getHistoricalActions() {
+        return historicalActions;
+    }
+
+    public void setHistoricalActions(List<Actions> historicalActions) {
+        this.historicalActions = historicalActions;
     }
 }
