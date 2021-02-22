@@ -3,10 +3,8 @@ package com.toni.programming.data;
 
 public abstract class LifeBeing implements IAction, IRender {
 
-    private Status status;
-    private String typeOfToy;
-
-
+    protected Status status;
+    protected String typeOfToy;
 
     public Status getStatus() {
         return status;

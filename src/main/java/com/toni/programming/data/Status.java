@@ -2,70 +2,11 @@ package com.toni.programming.data;
 
 import java.util.List;
 
-public class Status extends LifeBeing {
+public class Status {
 
     private Integer statusPoints;
     private String currentStatus;
 
-    @Override
-    public void doAttack() {
-
-    }
-
-    @Override
-    public void doDefend() {
-
-    }
-
-    @Override
-    public void doEscape() {
-
-    }
-
-    @Override
-    public void doFly() {
-
-    }
-
-    @Override
-    public void doDig() {
-
-    }
-
-    @Override
-    public void doHeal() {
-
-    }
-
-    @Override
-    public void doSwim() {
-
-    }
-
-    @Override
-    public void doSleep() {
-
-    }
-
-    @Override
-    public void doEat() {
-
-    }
-
-    @Override
-    public void doWeakened() {
-
-    }
-
-    @Override
-    public List<Actions> getCurrentActions() {
-        return null;
-    }
-
-    @Override
-    public String doRender(RenderType renderType) {
-        return null;
-    }
 
     public Integer getStatusPoints() {
         return statusPoints;

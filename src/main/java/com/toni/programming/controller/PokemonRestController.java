@@ -50,15 +50,15 @@ public class PokemonRestController {
                             @RequestParam(value = "color", defaultValue = "blue") String color,
                             @RequestParam(value = "level", defaultValue = "36") Integer level) {
 
+        List<Actions> historicalActions = new ArrayList<>();
         gameService.setCurrentLifeBeing(new Pokemon(name, type, color, level));
-        gameService.getCurrentLifeBeing().doAttack();
-
-        List<Actions> pokemonActions = new ArrayList<>();
-
-        pokemonActions.add(Actions.ATTACK);
-        pokemonActions.add(Actions.DEFEND);
-        pokemonActions.add(Actions.SWIM);
-        gameService.getCurrentLifeBeing().setActions(pokemonActions);
+        gameService.doAction(Actions.ATTACK);
+        historicalActions.add(Actions.ATTACK);
+        gameService.doAction(Actions.DEFEND);
+        historicalActions.add(Actions.DEFEND);
+        gameService.getCurrentLifeBeing().setActions(historicalActions);
+        gameService.getCurrentLifeBeing().setCurrentActions(Actions.ATTACK);
+        //gameService.doAction(Actions.ESCAPE);
 
         return gameService.getCurrentLifeBeing();
 

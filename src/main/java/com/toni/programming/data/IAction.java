@@ -14,6 +14,7 @@ public interface IAction {
     public void doSleep();
     public void doEat();
     public void doWeakened();
-    public List<Actions> getCurrentActions();
+    public Actions getCurrentActions();
+    public void setCurrentActions(Actions pokeAction);
 
 }

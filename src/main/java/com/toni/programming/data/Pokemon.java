@@ -1,12 +1,14 @@
 package com.toni.programming.data;
 
 
+import com.toni.programming.service.GameService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pokemon extends LifeBeing implements IAction, IRender {
 
-    private Status status;
-    private String typeOfToy = "Pokemon";
+    GameService gameService = new GameService();
     private List<Actions> actions;
     private String name;
     private String Type;
@@ -15,7 +17,7 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
 
     @Override
     public String getTypeOfToy() {
-        return typeOfToy;
+        return "Pokemon";
     }
 
     @Override
@@ -74,14 +76,13 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
     }
 
 
-
     @Override
     public void doAttack() {
         Status attackStatus = new Status();
         UserAction attackUserAction = new UserAction();
         attackStatus.setStatusPoints(attackUserAction.getStartingPoints()+10);
         attackStatus.setCurrentStatus("Attack mode!");
-        setStatus(attackStatus);
+        gameService.getCurrentLifeBeing().setStatus(attackStatus);
     }
 
     @Override
@@ -90,7 +91,7 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
         UserAction defenseUserAction = new UserAction();
         defenseStatus.setStatusPoints(defenseUserAction.getStartingPoints());
         defenseStatus.setCurrentStatus("Defense mode!");
-        setStatus(defenseStatus);
+        gameService.getCurrentLifeBeing().setStatus(defenseStatus);
     }
 
     @Override
@@ -143,8 +144,13 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
     }
 
     @Override
-    public List<Actions> getCurrentActions() {
+    public Actions getCurrentActions() {
         return null;
+    }
+
+    @Override
+    public void setCurrentActions(Actions pokeAction) {
+
     }
 
     @Override

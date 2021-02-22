@@ -34,6 +34,29 @@ public class GameService {
 
     public void doAction (Actions pokeaction){
 
+        switch (pokeaction){
+            case ATTACK: getCurrentLifeBeing().doAttack();
+            break;
+            case DEFEND: getCurrentLifeBeing().doDefend();
+            break;
+            case ESCAPE: getCurrentLifeBeing().doEscape();
+            break;
+            case EAT: getCurrentLifeBeing().doEat();
+            break;
+            case FLY: getCurrentLifeBeing().doFly();
+            break;
+            case HEAL: getCurrentLifeBeing().doHeal();
+            break;
+            case SWIM: getCurrentLifeBeing().doSwim();
+            break;
+            case WEAKENED: getCurrentLifeBeing().doWeakened();
+            break;
+            case DIG: getCurrentLifeBeing().doDig();
+            break;
+            case SLEEP: getCurrentLifeBeing().doSleep();
+            break;
+        }
+
     }
 
 }
