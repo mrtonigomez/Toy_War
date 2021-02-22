@@ -4,10 +4,7 @@ import com.toni.programming.data.Actions;
 import com.toni.programming.data.Pokemon;
 import com.toni.programming.data.Status;
 import com.toni.programming.service.GameService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -56,9 +53,10 @@ public class PokemonRestController {
         historicalActions.add(Actions.ATTACK);
         gameService.doAction(Actions.DEFEND);
         historicalActions.add(Actions.DEFEND);
+        gameService.doAction(Actions.ESCAPE);
+        historicalActions.add(Actions.ESCAPE);
         gameService.getCurrentLifeBeing().setActions(historicalActions);
         gameService.getCurrentLifeBeing().setCurrentActions(Actions.ATTACK);
-        //gameService.doAction(Actions.ESCAPE);
 
         return gameService.getCurrentLifeBeing();
 
