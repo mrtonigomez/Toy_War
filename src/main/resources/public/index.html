@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>TOY WARDS!</title>
     <style>
-        body{font-family: Calibri;color: darkblue;}
+        body {
+            font-family: Calibri;
+            color: darkblue;
+        }
     </style>
 </head>
-<body>
+<body><!--
 <h1>Your mega toy IS HERE!</h1>
 
 <div id="current-pokemon">
@@ -28,30 +31,55 @@
     </ul>
     <h3>Actions from recent to older!</h3>
     <ol id="actions">
-    </ol>
+    </ol>-->
 
-</div>
+<form method="post" action="/rest/api/v1/new">
+    <input id="name" type="text" name="name">
+    <input id="type" type="text" name="type">
+    <input id="color" type="text" name="color">
+    <input id="level" type="text" name="level">
+    <input type="submit" value="Enviar">
+</form>
+<div id="salida"></div>
 
 <script>
-    fetch("http://localhost:8080/rest/api/v1/doAttack")
+    /* fetch("http://localhost:8080/rest/api/v1/doAttack")
+         .then(response => response.json())
+         .then(data => {
+             console.log(data);
+
+             document.getElementById('typeoftoy').innerHTML = data.typeOfToy;
+             document.getElementById('name').innerHTML = data.name;
+             document.getElementById('type').innerHTML = data.type;
+             document.getElementById('level').innerHTML = data.level;
+             document.getElementById('color').innerHTML = data.color;
+             document.getElementById('status-p').innerHTML = data.status.statusPoints;
+             document.getElementById('status-c').innerHTML = data.status.currentStatus;
+
+             let actionsDone = "";
+             console.log(data.actions.length);
+             for (let i = data.actions.length-1; i >= 0; i--) {
+                 actionsDone += `<li>${data.actions[i]}</li>`
+             }
+             document.getElementById('actions').innerHTML = actionsDone;
+
+         });*/
+
+    fetch("/rest/api/v1/getPokemons")
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            let content = ``;
+            data.forEach(item => {
+                content += `
+               <h4>${item.name}</h4>
+               <p>${item.type}</p>
+               <p>${item.level}</p>
+               <p>${item.color}</p>
+                `
+            })
 
-            document.getElementById('typeoftoy').innerHTML = data.typeOfToy;
-            document.getElementById('name').innerHTML = data.name;
-            document.getElementById('type').innerHTML = data.type;
-            document.getElementById('level').innerHTML = data.level;
-            document.getElementById('color').innerHTML = data.color;
-            document.getElementById('status-p').innerHTML = data.status.statusPoints;
-            document.getElementById('status-c').innerHTML = data.status.currentStatus;
-
-            let actionsDone = "";
-            console.log(data.actions.length);
-            for (let i = data.actions.length-1; i >= 0; i--) {
-                actionsDone += `<li>${data.actions[i]}</li>`
-            }
-            document.getElementById('actions').innerHTML = actionsDone;
+            document.getElementById('salida').innerHTML = content;
 
         });
 </script>

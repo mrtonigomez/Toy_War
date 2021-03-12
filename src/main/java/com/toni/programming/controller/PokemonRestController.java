@@ -17,15 +17,19 @@ public class PokemonRestController {
 
     GameService gameService = new GameService();
 
-    @GetMapping("/new")
+    @PostMapping("/new")
     public Pokemon getPokemon(@RequestParam(value = "name", defaultValue = "Charizard") String name,
                               @RequestParam(value = "type", defaultValue = "Fire") String type,
                               @RequestParam(value = "color", defaultValue = "red") String color,
                               @RequestParam(value = "level", defaultValue = "2") Integer level) {
 
-        gameService.setCurrentLifeBeing(new Pokemon(name, type, color, level));
-
+        gameService.addPokemons(new Pokemon(name, type, color, level));
         return gameService.getCurrentLifeBeing();
+    }
+
+    @GetMapping("/getPokemons")
+    public List<Pokemon> getPokemons(){
+        return gameService.getPokemonList();
     }
 
     @GetMapping("/getActions")
