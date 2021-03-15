@@ -8,6 +8,11 @@
             font-family: Calibri;
             color: darkblue;
         }
+
+        form{
+            margin-left: 2vw;
+            margin-top: 2vw;
+        }
     </style>
 </head>
 <body><!--
@@ -33,11 +38,11 @@
     <ol id="actions">
     </ol>-->
 
-<form method="post" action="/rest/api/v1/new">
-    <input id="name" type="text" name="name">
-    <input id="type" type="text" name="type">
-    <input id="color" type="text" name="color">
-    <input id="level" type="text" name="level">
+<form method="post" action="/controller/paint">
+    Nombre: <input id="name" type="text" name="name"><br>
+    Tipo: <input id="type" type="text" name="type"><br>
+    Color: <input id="color" type="text" name="color"><br>
+    Nivel: <input id="level" type="text" name="level"><br>
     <input type="submit" value="Enviar">
 </form>
 <div id="salida"></div>
@@ -65,23 +70,7 @@
 
          });*/
 
-    fetch("/rest/api/v1/getPokemons")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            let content = ``;
-            data.forEach(item => {
-                content += `
-               <h4>${item.name}</h4>
-               <p>${item.type}</p>
-               <p>${item.level}</p>
-               <p>${item.color}</p>
-                `
-            })
 
-            document.getElementById('salida').innerHTML = content;
-
-        });
 </script>
 </body>
 </html>

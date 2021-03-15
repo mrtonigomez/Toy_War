@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        body{
+            margin: 0;
+
+        }
+
+        h1{
+            text-align: center;
+            color: red;
+            margin: 1.5vw;
+
+        }
+
+        div{
+            margin: 3vw;
+            background-color: aquamarine;
+            color: black;
+            padding: 1.5vw;
+
+        }
+
+        *{
+            font-family: sans-serif;
+
+        }
+        img{
+            width: 70vw;
+            display:block;
+            margin: auto;
+            height: 45vh;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" alt="pokemon">
+</header>
+<div id="salida">
+    <ul id="ul">
+
+    </ul>
+</div>
+
+<script>
+    fetch("/rest/api/v1/getPokemons")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let content = ``;
+            data.forEach(item => {
+                content += `
+                <li>
+                    <h4>${item.name}</h4>
+                    <p>${item.type}</p>
+                    <p>${item.level}</p>
+                    <p>${item.color}</p>
+                </li>
+
+                `
+            })
+
+            document.getElementById('ul').innerHTML = content;
+
+        });
+</script>
+</body>
+</html>
