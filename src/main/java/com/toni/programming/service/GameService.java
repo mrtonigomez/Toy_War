@@ -12,12 +12,24 @@ public class GameService {
 
     private Integer maxPoints = 100;
     UserAction userAction = new UserAction();
-    public static List<UserAction> userActions = new ArrayList<>();
     public static List<Pokemon> pokemonList = new ArrayList<>();
     private static Pokemon currentLifeBeing = new Pokemon();
+    private static List<Actions> pokeActions = new ArrayList<>();
+
 
     public void addPokemons(Pokemon pokemon){
         pokemonList.add(pokemon);
+    }
+
+    public void addActions(Actions actions){
+        pokeActions.add(actions);
+    }
+
+    public void setPokeActions(List<Actions> pokeActions) {
+        GameService.pokeActions = pokeActions;
+    }
+    public List<Actions> getPokeActions(){
+        return pokeActions;
     }
 
     public  List<Pokemon> getPokemonList() {
@@ -36,10 +48,6 @@ public class GameService {
         GameService.currentLifeBeing = currentLifeBeing;
     }
 
-    public List<Actions> getPokeActions() {
-        return currentLifeBeing.getActions();
-    }
-
     public void addPokeActions(List<Actions> actionsList) {
         currentLifeBeing.setActions(actionsList);
     }
@@ -47,29 +55,53 @@ public class GameService {
     public void doAction (Actions pokeaction){
 
         switch (pokeaction){
-            case ATTACK: getCurrentLifeBeing().doAttack();
-            break;
-            case DEFEND: getCurrentLifeBeing().doDefend();
-            break;
-            case ESCAPE: getCurrentLifeBeing().doEscape();
-            break;
-            case EAT: getCurrentLifeBeing().doEat();
-            break;
-            case FLY: getCurrentLifeBeing().doFly();
-            break;
-            case HEAL: getCurrentLifeBeing().doHeal();
-            break;
-            case SWIM: getCurrentLifeBeing().doSwim();
-            break;
-            case WEAKENED: getCurrentLifeBeing().doWeakened();
-            break;
-            case DIG: getCurrentLifeBeing().doDig();
-            break;
-            case SLEEP: getCurrentLifeBeing().doSleep();
-            break;
+            case ATTACK:
+                getCurrentLifeBeing().doAttack();
+                addActions(pokeaction);
+                break;
+            case DEFEND:
+                getCurrentLifeBeing().doDefend();
+                addActions(pokeaction);
+                break;
+            case ESCAPE:
+                getCurrentLifeBeing().doEscape();
+                addActions(pokeaction);
+                break;
+            case EAT:
+                getCurrentLifeBeing().doEat();
+                addActions(pokeaction);
+                break;
+            case FLY:
+                getCurrentLifeBeing().doFly();
+                addActions(pokeaction);
+                break;
+            case HEAL:
+                getCurrentLifeBeing().doHeal();
+                addActions(pokeaction);
+                break;
+            case SWIM:
+                getCurrentLifeBeing().doSwim();
+                addActions(pokeaction);
+                break;
+            case WEAKENED:
+                getCurrentLifeBeing().doWeakened();
+                addActions(pokeaction);
+                break;
+            case DIG:
+                getCurrentLifeBeing().doDig();
+                addActions(pokeaction);
+                break;
+            case SLEEP:
+                getCurrentLifeBeing().doSleep();
+                addActions(pokeaction);
+                break;
         }
-
     }
 
+    public void reset() {
+        List<Actions> resetList = new ArrayList<>();
+        getCurrentLifeBeing().setStatus(new Status());
+        setPokeActions(resetList);
+    }
 }
 

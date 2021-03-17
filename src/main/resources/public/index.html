@@ -9,9 +9,17 @@
             color: darkblue;
         }
 
-        form{
-            margin-left: 2vw;
-            margin-top: 2vw;
+        div{
+            display: block;
+            margin: auto;
+            text-align: center;
+            padding: 2vw;
+            background-color: #e6e6e6;
+            min-height: 100vh;
+        }
+
+        h2{
+            text-align: center;
         }
     </style>
 </head>
@@ -37,15 +45,17 @@
     <h3>Actions from recent to older!</h3>
     <ol id="actions">
     </ol>-->
+<h2>Crea tu pokemon!</h2>
+<div>
+    <form method="post" action="/controller/paint">
+        Nombre: <input id="name" type="text" name="name"><br>
+        Tipo: <input id="type" type="text" name="type"><br>
+        Color: <input id="color" type="text" name="color"><br>
+        Nivel: <input id="level" type="text" name="level"><br>
+        <input type="submit" value="Enviar">
+    </form>
+</div>
 
-<form method="post" action="/controller/paint">
-    Nombre: <input id="name" type="text" name="name"><br>
-    Tipo: <input id="type" type="text" name="type"><br>
-    Color: <input id="color" type="text" name="color"><br>
-    Nivel: <input id="level" type="text" name="level"><br>
-    <input type="submit" value="Enviar">
-</form>
-<div id="salida"></div>
 
 <script>
     /* fetch("http://localhost:8080/rest/api/v1/doAttack")

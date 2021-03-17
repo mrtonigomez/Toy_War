@@ -11,11 +11,13 @@ import java.util.List;
 public class Pokemon extends LifeBeing implements IAction, IRender {
 
     GameService gameService = new GameService();
+
     private List<Actions> actions;
     private String name;
     private String Type;
     private String color;
     private Integer level;
+    private Actions currentAction;
 
     @Override
     public String getTypeOfToy() {
@@ -176,8 +178,9 @@ public class Pokemon extends LifeBeing implements IAction, IRender {
 
     @Override
     public void setCurrentActions(Actions pokeAction) {
-
+        this.currentAction = pokeAction;
     }
+
 
     @Override
     public String doRender(RenderType renderType) {

@@ -5,8 +5,12 @@ import com.toni.programming.data.Pokemon;
 import com.toni.programming.data.RenderType;
 import com.toni.programming.data.Status;
 import com.toni.programming.service.GameService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +21,15 @@ public class PokemonRestController {
 
     GameService gameService = new GameService();
 
-    @PostMapping("/new")
+    @GetMapping("/new")
     public Pokemon getPokemon(@RequestParam(value = "name", defaultValue = "Charizard") String name,
                               @RequestParam(value = "type", defaultValue = "Fire") String type,
                               @RequestParam(value = "color", defaultValue = "red") String color,
                               @RequestParam(value = "level", defaultValue = "2") Integer level) {
 
-        gameService.addPokemons(new Pokemon(name, type, color, level));
+        Pokemon charizard = new Pokemon(name, type, color, level);
+        gameService.setCurrentLifeBeing(charizard);
+        gameService.addPokemons(charizard);
         return gameService.getCurrentLifeBeing();
     }
 
@@ -73,6 +79,15 @@ public class PokemonRestController {
         gameService.setCurrentLifeBeing(new Pokemon("Picachu", "Electric", "Yellow", 200));
         return gameService.getCurrentLifeBeing().doRender(RenderType.HTML);
 
+    }
+
+    @GetMapping("/do/{action}")
+    public Pokemon doAction(@PathVariable("action") String action) {
+
+        gameService.doAction(Actions.valueOf(action.toUpperCase()));
+        gameService.getCurrentLifeBeing().setActions(gameService.getPokeActions());
+        gameService.getCurrentLifeBeing().setCurrentActions(Actions.valueOf(action.toUpperCase()));
+        return gameService.getCurrentLifeBeing();
     }
 
 }

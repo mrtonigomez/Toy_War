@@ -5,19 +5,19 @@
     <title>Title</title>
     <style>
 
-        body{
+        body {
             margin: 0;
 
         }
 
-        h1{
+        h1 {
             text-align: center;
             color: red;
             margin: 1.5vw;
 
         }
 
-        div{
+        div {
             margin: 3vw;
             background-color: aquamarine;
             color: black;
@@ -25,13 +25,14 @@
 
         }
 
-        *{
+        * {
             font-family: sans-serif;
 
         }
-        img{
+
+        img {
             width: 70vw;
-            display:block;
+            display: block;
             margin: auto;
             height: 45vh;
         }
@@ -40,7 +41,8 @@
 <body>
 
 <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" alt="pokemon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+         alt="pokemon">
 </header>
 <div id="salida">
     <ul id="ul">
@@ -54,21 +56,41 @@
         .then(data => {
             console.log(data);
             let content = ``;
-            data.forEach(item => {
-                content += `
+            let actions = ``
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].actions ==null){
+                    content += `
                 <li>
-                    <h4>${item.name}</h4>
-                    <p>${item.type}</p>
-                    <p>${item.level}</p>
-                    <p>${item.color}</p>
-                </li>
+                    <h4>Nombre: ${data[i].name}</h4>
+                    <p>Tipo: ${data[i].type}</p>
+                    <p>Nivel: ${data[i].level}</p>
+                    <p>Puntos actuales: 50</p>
+                    <p>Status actual: Normal</p>
+                    <p>Acciones: Ninguna</p>
+                    <p>Color: ${data[i].color}</p>
+                </li>`
+                }else{
+                    actions =``
+                    for (let j = 0; j < data[i].actions.length; j++) {
+                        actions +=`${data[i].actions[j]} `
+                    }
+                    content += `
+                <li>
+                    <h4>Nombre: ${data[i].name}</h4>
+                    <p>Tipo: ${data[i].type}</p>
+                    <p>Nivel: ${data[i].level}</p>
+                    <p>Puntos actuales: ${data[i].status.statusPoints}</p>
+                    <p>Status actual: ${data[i].status.currentStatus}</p>
+                    <p>Acciones: ${actions}</p>
+                    <p>Color: ${data[i].color}</p>
+                </li>`
 
-                `
-            })
+                }
+            }
 
             document.getElementById('ul').innerHTML = content;
+            })
 
-        });
 </script>
 </body>
 </html>

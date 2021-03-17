@@ -13,11 +13,19 @@ public class PokemonsController {
     GameService gameService = new GameService();
 
     @PostMapping("/paint")
-    public String pintarPokemons(@ModelAttribute Pokemon pokemon, Model model){
+    public String pintarPokemonsPost(@ModelAttribute Pokemon pokemon){
 
-        model.addAttribute("pokemon", pokemon);
+        gameService.setCurrentLifeBeing(pokemon);
+        gameService.reset();
         gameService.addPokemons(pokemon);
 
         return "pokemons";
     }
+
+    @GetMapping("/")
+    public String pintarPokemonsGet(){
+
+        return "pokemons";
+    }
+
 }
